@@ -212,7 +212,7 @@ st.set_page_config(
 if "conversation_history" not in st.session_state:
     st.session_state.conversation_history = []
 if "selected_role" not in st.session_state:
-    st.session_state.selected_role = "人质"
+    st.session_state.selected_role = "弟弟"
 if "initialized" not in st.session_state:
     st.session_state.initialized = False
 
@@ -228,7 +228,7 @@ with st.sidebar:
     selected_role = st.selectbox(
         "选择角色",
         ["弟弟"],
-        index=0 if st.session_state.selected_role == "小丑" else 1
+        index=0 if st.session_state.selected_role == "弟弟" else 1
     )
     
     # 如果角色改变，重新初始化对话
