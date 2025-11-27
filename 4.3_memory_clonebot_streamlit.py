@@ -41,8 +41,7 @@ MEMORY_FOLDER = "4.2_memory_clonebot"
 
 # 角色名到记忆文件名的映射
 ROLE_MEMORY_MAP = {
-    "小丑": "joker_memory.json",
-    "人质": "hostage_memory.json"
+    "弟弟": "brother_memory.json"
 }
 
 # ========== 初始记忆系统 ==========
@@ -51,56 +50,34 @@ ROLE_MEMORY_MAP = {
 def get_portrait():
     """返回 ASCII 艺术头像"""
     return """
-kkkkkkkkkkkkkkkkkOXXk:;oKNNNNXX0OOOOOOOOO0KK000OOKKK00KK0KK0OkOOOOkO0KNNNNNXkc,:x0OOkkkkkkkkkkkkkkkk
-kkkkkkkkkkkkkkkkOKXKxl::dKNNWNNXK0OOOO0KXXXXKKK0KKKKKKKKKKKK0OOOOO0KXNWWNNKkc,;ck0OOOOOkkkkkkkkkkkkk
-kkkkkkkkkkkkkkkk0XXKxloclOXNNNNXK0KKKKXXXXXXXXXXXXXXXXXXKKKKKK00O0XNNNNNNKkl;,clk0kOOOOOOOOOOkkkkkkk
-kkkkkkOOOOOOOOOOKKKKxlolcd0KXXXXXXXNNNXNNNNNNNNNNNNNNXXXXXXXKKKKKKKXXXXXKOdc,:coOOxO0OOOOOOOOOOOOOOk
-OOOOOOOOOOOOOOO0KK0XOlcc:lk0KKXNNNNNNNNNNNNNWWWWWWWNNNNNXXXXXXKKKKK0KKK0Oxl,,::d0Odk0OOOOOOOOOOOOOOO
-OOOOOOOOOOOOOOO0K00KKkl:;:d0KXXXXXXNNNNNWWWWWWWWWWWWWWNNNXXXXXXKKK00000Oko;'':d00xok0000OOOOOOOOOOOO
-OOOOOOOOOOOO00OKKOkOKX0xld0XXKKKXXXNNNNWWWWWWWWWWWWWWWWWWNNNNXXXKK0000Okkdc;oOKKkolx000000000OOOOOOO
-OOOOOOOO0O000000KkoxOKXXXXXKKKKXXXXNNNNWWWWWWWWWWWWWWWWWWNNNNXXXKK00OOOkdxkk000Odllk0000000000000OOO
-OOOO000000000000KOoldOKXXK000KKKKXXXXNNNWWWWWWWWWWWWWWWWWNNNXXXXK00OkkkdloxkOkkdccdOK0K0000000000000
-0000000000000000KKxllkXK0K0kkO0000KKXXNNNNNWWWWWWWWWWNNNNNNNXXKK0Okkxxdl:lddxxdccokKKKKKKKKK00000000
-000000000000000KK00xd0K0OOkxddxkOOkOKKXXXXNNNNNNNNNNNXXXXXXXKK0Okxddolc;:llodxocoxk0KKKKKKKKKK000000
-000000000KKKKKK0kxdx0K0Okxxxxdooxkkkxk0KKKKKXXKKKKKKKKKKKK000Oxdoool:;,;:cllllcodood0XKKKKKKKKKK0000
-000000KKKKKKKKK0kdld00kkxddxO0OkddxkOkkkkkkOO0000000000OOkxxxxxdolc:clll::::::coolokKXXXXXXXXKKKKK00
-000KKKKKKKKKKKKKKOxk00xddddk0KKKK0OOOKKK00000KKXXXXXXXK000OO00Okxxxkkkxoc;;;;;:oxk0XXNXXXXXXXXXKKKK0
-KKKKKKKKKKKXXXXXXNNXXOddddxO00KKXXXNNNNNNNWWWWWWNNNWWNNNNNNXXXXKKK00Okxdl:,,,,:d0KKKXNNNNNNNNXXXKKKK
-KKKKKKKXXXXXXXXXNXNNX0doodkOOkxdddxxkOKXXNNNNNNNNNNNNNNNNNXXK0kddollloool:,'',:dxkkOKNNNNNNNNNXXKKKK
-KKKKKXXXXXXXNNNNNK00OkxoldkOkdollcc:;;:cldk0KXXXXXXXXXK0Oxoc:,,,,;:::cclc;,'',:clodOXNNNNNNNNNXXXXKK
-KKKXXXXXXXNNNXXXXK0OOkxdodkOOkkkOOOOkdlc::clxO0KKKKK0Oxoc:;;:coxxkkxddool:;,;;:ccox0KKKXXNNNNNNXXXXK
-XXXXXXXXXXXK0OkOOOOkOOOkxxxxxxddxxkkkkkxdooooxkO000Okxoloddxxkkkxddoollllllloodxdxkkkxxkk0XNNNNNNNXX
-XXXXXXXXXKOOkxddddololllc;,,clcdkdcll;;:ccoddxk000OOkxddddoo:,;;:ll:;;;'.'':lc::;:cccloddxOXNNNNNNNN
-XXXXXXXNKOOOOkxddl:;:ccc:,',lodOx;,l:..,,';ldxO0KKK0Oxdoc,,;';c,.;l:;;:'..';:::,'',:cloddxkKNNNNNNNN
-XXXXNNNNXOOOkkkkkkdc:c:;;,,oxllo:,....;ol;,codxkOOkkxdol,,c:,c,...;;,:oc..;;;;;''';:lodxxxkKNNNWWNNN
-XXNNNNNWNKOOOOkxdol:,',;;,;dxl:::;,,';ldo:;:lllllllllccc,;odc;,,,,,,';xl.';;,'...',;lxkkkk0NWWWWWWWW
-NNNNNNWWWX0OO0Oxl:,''.',:;;oxlcc:;;;:clloc::::lxkkkko:::,;odoc:;;;;;,cdc',;,'.....',lkOOkOKWWWWWWWWW
-NNNNNNWWN0xxxxxxxol:,'',;::colcc::::::cc:;;:;:kXXXXXOl;;;,;:ccc:;::;;cc;::,,......':ldxxxdOXWWWWWWWW
-NNWWWWWNKxooooddddxdc;,,;:cllc;,,,,,,;;;;::;;oO0XXK0kdc;;:;,,,,,,,',:cll:;,'....',;looooood0NWWWWWWW
-NNWWWWWNOlllllooodxxdl;,,;::cc:;;;;::ccccc:coolldxdocllc;;:c:::;;;;;:::;,,.....';:cllllllllkNWWWWWWW
-NNNNNNWXxcccccllldxxxdlc:;oo::;,,,;;;;;::lx0kc,''','.':xxl:;,;;;,,,,,;,''.....';loollccccclkNWWWWWWW
-NNNNNNNXxcc::cccloodddddddxo:cc;,,,,;:cok0XXKOkdc;;;:cd0K0kdc:;,'',,,;,','...',cooolcccccccONWWWWWWW
-NNNNNNNN0l::::::clllloxkkOkdl:ll:::cldkO0KKKKK00Oxxxxxk000OOkdlc:;;;:,,;;:c::;;clllcc::::coKWWWWWWWW
-NNNNNNNWXkc:;;:::cccldOKKKKOd;,colccodxkkkxdoc:::::;;;:coodddolcc:cl;',oOKXX0dccccccc::::lONWWWWWWWW
-NNNNNNNNWXkl:;;::::codkkxdxkxd:';cllcllool:;;:cllcccc:;,,;:ccccccl:,,cxOOkkOkxdc::cccc:clkXWWWWWWWWW
-NNNNNNNNWWN0dc:::cclolcllccllol;.';cllc::ccclccccccccc::c::::clc:,..;lddllooccooccclccld0NWWWWWWWWWW
-NNNNNNNWWNWNXOdllllodoccccccloc;'''',;;:c:::::;;;;;;;;;::::cc;'....';cllccllclddooooodOXWWWWWWWWWWWW
-NNNNNNWWWWWWWNX0kxxxkkxdddddddc:;;;'.  .';cccloddddoolcccc;,.   ..,;:cododddxkkkxxxk0XNWWWWWWWWWWWWW
-NNNNNWWWWWWWWWWWNXKKK0OOOOkxddoodxc.     ..,:clooooollc;,...     .lollodxkOOOO00KKXNWWWWWWWWWWWWWWWW
-NNNNNNNNWWWWWWWWWWWWWWNNXXK000KKXXd.     .....',,,,,,'.....      .,okO00O0KXXNNWWWWWWWWWWWWWWWWWWWWW
-NNNNNWWWWWWWWWWWWWWWWWNWWWWWWWWXx:'.      ................         .,dKWWWWWWWWWWWWWWWWWWWWWWWWWWWWW
-NNNWWWWWWWWWWWWWWWWWWWWWWWWWNN0l.   .       ............             .:kXNWWWWWWWWWWWWWWWWWWWWWWWWWW
-NWWWWWWWWWWWWWWWWWWWWWWWWNXK0kc.                 ...                 ..':okKNWWWWWWWWWWWWWWWWWWWWWWW
-NNNWWWWWWWWWWWWWWWWWWNXKOxxxxo,.                                      .....,:ox0XNWWWWWWWWWWWWWWWWWW
-NNWWWWWWWWWWWWWNXKOxlcclodoc'                                        ........':ldOXNWWWWWWWWWWWWWW
-WWWWWWWWWWWWWNNKOxol::::clooc;.                                       ............',:lx0XNWWWWWWWWWW
-WWWWWWWWWWNX0kdlccc::::ccllc:,.    ...                               ..............''',;cd0NWWWWWWWW
-WWNWWWWNX0kdllccccc::ccccccc:,.  ...';,...                 ...''..   ..''''.........''',,;:oONWWWWWW
-WWWNWWNKkoollcc::::::cccccc::,.  ....cxxoc;,'...........',;:lol,.......',,,,,''.....''',;;::lxXWWWWW
-NNWWWWXkollc:::::::::::::::::;.. ....'dOOOOkxdddooooooddxxxkkkc.......'',,,;;;,,'''''',,;;:c:ckXWWWW
-NNWWWXkolcc:::::;::::::::::::;'. .....;x00O000OOOOOOOOOOOOOOOl'.......',,,,;;;;;;;,,,,,;;;;:::lONWWW
-NWWWN0occ::::;;;;;;;:;;::::::,.  ......:OKK00000000000000000d'........,,;;,,,;;;;;;;;,,,;;;;;;:dXWWW
-NNWWNOl::;;;;;;;;;,,;;;::;;:;.   .......o0KKKKKKKKKKKKKKKKKk;.........,;;;,,,;;,,,,,,,,,,,,,,,;l0WWW
+;',:c:;:c:,','..'',;:;;;:,;ONNWNKXWMMMMW
+,',;;;:cc;'',;,,,'';:::::;;kWWWNKXWWWWWW
+::c:ccccc::::::::,,::cccc:;xNWWWXXWWWWWW
+ccc:::::::ccccccc;,;;;;:cc:o0KKKXXWWXXNW
+ccccccccccccc:,'...     ...'cdkkkKNNOkKN
+lllllllllll:'.               .'cxOKX0OO0
+oooooooooo;.                    ,oxddooo
+xxxxxxddd:.       ......'..      ;dxdddd
+kkOOOOOOkc.......',,;,;cll;..    'cloolc
+K0000OOOkd:,;::cclccllooool:'.  ....''''
+lllccc:;;;,';;codlcccccc:clc;....''''''.
+;;::::;;,,,;cccloooooolc:llc:;:cc:;:;;;;
+::;:lc::::;cddodxxxxxkkxdddoccllc::ccccc
+cc:coolccc:cddoodddddxxxddolcll:'..'',''
+cc::llcccc::odoloddxxxxdoolc::;,,',,;:;;
+oooooolllc::clllloodddddol::::cccl:;:cc:
+looooddoooollloodxxxddoc:;;;;;:::c:;clcc
+llooodooooolllc::ccc::;;:ccccclolol;:cc:
+llooodooolc:,'...;;:::cloooolll::lollllc
+llooodolc,......;ccllloddddddl;..':llloo
+llloool;.......'coooodddddoc,......':ccl
+llllol,.........';:::::;,'...........,:c
+llllc,................................':
+:cll;..................................'
+.';:'....','............................
+;,'......:dd:,'.........................
+::;.....',co:;cc:'......... ............
+c:,.....';lc;cloo:........  ..........  
     """
 
 # ========== 主程序 ==========
@@ -151,41 +128,36 @@ def roles(role_name):
     
     # ========== 第二步：获取基础人格设定 ==========
     role_personality = {
-        "小丑": """
-        【人格特征】
-        你是蝙蝠侠中的小丑（Joker），一个疯狂而不可预测的犯罪天才：
-        - **黑暗哲学**：你认为人性本质是混乱的，秩序只是假象
-        - **黑色幽默**：你的幽默是扭曲的，用笑声掩盖内心的黑暗
-        - **不可预测**：情绪波动极大，时而狂笑，时而突然严肃
-        - **哲学思考者**：喜欢用"为什么这么严肃？"来质疑一切
-        - **享受混乱**：你制造混乱不是为了钱或权力，而是为了证明一个观点
-        - **对蝙蝠侠的执念**：你与蝙蝠侠是一枚硬币的两面
+         "弟弟": """
+        【性格特征】
+         你是姐姐的弟弟，一个正在上六年级乖巧又爱"犯贱"还比较怕姐姐的小男孩
+        - **黏人依赖**：很喜欢找姐姐一起玩游戏，会用简单的话询问
+        - **乖巧懂事**：姐姐说不方便时会配合，会主动告诉姐姐自己的小状况（比如要写作业）
+        - **活泼直率**:开心时会说“666”“嘻嘻”,会直接分享自己的小目标(比如想上星耀)
+        - **有耐心**：姐姐没时间陪玩时会提出"就玩一局,求你了"类似这种请求
+        - **带点稚气**：说话会用“肚肚疼”这种可爱的表达，对姐姐有很强的亲近感
+        - **爱"犯贱"**：会故意逗姐姐,比如和姐姐拌嘴,偶尔会气姐姐但是很有眼力见,感觉姐姐要生气时立刻停止
+        - **爱说网络用语**：聊天里会自然带出各种流行梗,用网络用词表达情绪和想法
+        - **逃避学习,喜欢玩游戏**：被姐姐问写没写作业时会立刻转移话题,例如"扯到游戏、或者简单的敷衍的回复"。
+                                  如果正在写作业,姐姐问"要玩游戏吗?"的时候会说:"正在写作业等我10分钟"类似这种
+        - **"爱秀游戏/潮流相关：会分享游戏皮肤、游戏战绩
+        - **"有点小自恋:会用夸张的“回头率10000%”“最帅”来夸自己，觉得自己的审美和游戏水平都很“顶”",
 
         【语言风格】
-        - 经常说"Why so serious?"（为什么这么严肃？）
-        - 标志性的笑声："哈哈哈哈哈！"或"Hee hee hee!"
-        - 喜欢用反问句和哲学性的问题
-        - 说话时经常大笑，即使谈论黑暗话题
-        - 喜欢讲故事，尤其是关于"糟糕的一天"的故事
-        - 用比喻和夸张来表达观点
-        - 会突然改变话题或情绪
-        - 语言中充满讽刺和黑色幽默
-        """,
-        
-        "人质": """
-        【人格特征】
-        你是一个被小丑绑架的人质，内心充满恐惧和不安：
-        - 说话小心翼翼，不敢激怒小丑
-        - 情绪紧张，经常结巴或停顿
-        - 试图保持礼貌，但声音颤抖
-        - 内心想要逃脱，但不敢表现出来
-        - 对周围环境高度警觉
+        - 会主动问姐姐“现在玩吗？”“来一局不？”"姐姐上号不","邀约玩《王者》《蛋仔》这类游戏
+        - 会用“OK?”“求求你了”“最后一局”"等我一会马上"这种撒娇式的请求
+        - 说话直白可爱，会分享自己的小状况（比如“我肚肚有点疼”“刚洗完澡，在擦身”）
+        - 会用“666”“嘻嘻”表达开心的情绪
+        - 对姐姐的要求会爽快回应“行”“哦”“好”
+        - 会直接叫“姐姐”，语气带着亲近感
+        - 分享游戏战绩时会用比较自恋的语气
 
-        【语言风格】
-        - 使用"请"、"不好意思"等礼貌用语
-        - 经常停顿，用"呃..."、"那个..."等填充词
-        - 声音微弱，不敢大声说话
-        - 避免直接拒绝或反驳
+        【兴趣爱好细节】
+        - "游戏偏好：游戏中什么英雄都喜欢尝试一下,然后给姐姐演示；有时会兴奋地和姐姐分享“我刘禅上区榜了！”",
+        - "穿搭爱好：喜欢蓝色球鞋,有时会求姐姐给买,还要问姐姐“我今天帅不帅？”
+        - "梗图收藏：和姐姐视频时喜欢截图姐姐丑照做成表情包
+        - "游戏分享：拿到五杀/新皮肤/刘禅上区榜会第一时间截图发给姐姐，配文“姐姐你看我牛不牛比？”“姐！我刘禅上区了，牛不牛？”"
+        - "学习生活相关：会和姐姐分享上课的趣事，和用今天妈妈做了什么好吃的来馋姐姐
         """
             }
     
@@ -255,7 +227,7 @@ with st.sidebar:
     # 角色选择
     selected_role = st.selectbox(
         "选择角色",
-        ["小丑", "人质"],
+        ["弟弟"],
         index=0 if st.session_state.selected_role == "小丑" else 1
     )
     
